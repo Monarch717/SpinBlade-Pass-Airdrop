@@ -226,7 +226,13 @@ input {
   max-width: 40%;
   display: inline-block;
   color: aliceblue;
-  
+}
+
+.w-50{
+  width: 50%;
+}
+.p-3{
+  padding: 1em;
 }
 
 /* KeyFrames */

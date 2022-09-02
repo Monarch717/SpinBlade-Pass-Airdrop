@@ -1,18 +1,15 @@
-import React, {useEffect, useState, useMemo, useCallback} from "react";
+import React, {useEffect, useState} from "react";
 import mintPass_abi from "../utils/MintPass.json";
-import getMumbaiWeb3 from "./getMumbaiWeb3.js";
-import BigNumber from "bignumber.js";
 import {ethers} from "ethers";
 
-const mint1155_addr = "0x25A212DcA594267dDA29d1759D9553f116464D7e";
 const mintPass = "0x61c4C67842D701AFe1237719D4cC37D8954aEa77";
 let MintPassPortal;
-
 
 export default function TokenSale() {
 
     const [currentAccount, setCurrentAccount] = useState("");
     const [tokenId, setTokenId] = useState("");
+    const [toAddresses, setToAddresses] = useState("");
     const checkIfWalletIsConnected = async () => {
         try {
             const {ethereum} = window;
@@ -63,8 +60,9 @@ export default function TokenSale() {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
             MintPassPortal = new ethers.Contract(mintPass, mintPass_abi, signer);
-            let approved = await MintPassPortal.setApprovalForAll(mint1155_addr, true);
-            if (approved) {
+            const toAddressArray = [];
+            let airdrop = await MintPassPortal.airDrop(toAddressArray, tokenId);
+            if (airdrop) {
                 window.location.reload();
             }
         }
@@ -74,7 +72,6 @@ export default function TokenSale() {
         checkIfWalletIsConnected();
     }, []);
     useEffect(async () => {
-        const {ethereum} = window;
     }, [currentAccount]);
 
     return (
@@ -91,11 +88,7 @@ export default function TokenSale() {
                     }
                     <p className="header gradient-text1">🎁 SpinBlass Pass Airdrop 🎁</p>
                     <p className="sub-text1 gradient-text2">
-                        You can mint NFTs using USDC
-                    </p>
-                    <p className="sub-text2 gradient-text2">
-                    </p>
-                    <p className="sub-text2 gradient-text2">
+                        🔊 Only Contract Owner can make airdrop! 🔊
                     </p>
                     <div>
                         {!currentAccount ? (
@@ -105,11 +98,17 @@ export default function TokenSale() {
                         ) : (
                             <>
                                 <br></br>
-                                <hr/>
-
                                 <>
                                     <div>
-                                        <input className="tokenId" type="number" placeholder="0" value={tokenId}
+                                        <textarea className="toAddresses w-50 p-3" rows={5}
+                                                  placeholder={`To Addresses here : Type Array`}
+                                                  onChange={(e) => {
+                                                      setToAddresses(e.target.value);
+                                                  }}/>
+                                        <br/>
+                                        <br/>
+                                        <input className="tokenId w-50 p-3" type="number" placeholder="0"
+                                               value={tokenId}
                                                onChange={(e) => {
                                                    setTokenId(e.target.value);
                                                }}/>
@@ -117,7 +116,7 @@ export default function TokenSale() {
                                     <br/>
                                     <div>
                                         <button className="cta-button connect-wallet-button" onClick={airdrop_func}>
-                                            AirDrop
+                                            🪄 AirDrop 🪄
                                         </button>
                                     </div>
                                 </>
