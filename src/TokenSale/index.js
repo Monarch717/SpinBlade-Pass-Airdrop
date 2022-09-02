@@ -102,7 +102,7 @@ export default function TokenSale() {
                                 . {currentAccount.slice(-5)}</p>
                         </div>
                     }
-                    <p className="header gradient-text1">🎁 SpinBlass Pass Airdrop 🎁</p>
+                    <p className="header gradient-text1">🎁 SpinBlade Pass Airdrop 🎁</p>
                     <p className="sub-text1 gradient-text2">
                         🔊 Only Contract Owner can make airdrop! 🔊
                     </p>
