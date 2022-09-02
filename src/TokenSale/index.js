@@ -65,13 +65,18 @@ export default function TokenSale() {
             })
 
             try {
-                let airdrop = await MintPassPortal.airDrop(toAddressArray, tokenId);
-                let response = await airdrop.wait()
-                if (response) {
-                    alert("Airdrop is completed!\nTransaction Hash is : " + response.transactionHash);
+                if (tokenId !== "" && toAddressArray.length > 0) {
+                    let airdrop = await MintPassPortal.airDrop(toAddressArray, tokenId);
+                    let response = await airdrop.wait()
+                    if (response) {
+                        alert("Airdrop is completed!\nTransaction Hash is : " + response.transactionHash);
+                    }
+                } else {
+                    alert("Please enter Address list and token Id!");
                 }
+
             } catch (e) {
-                console.log(e.getMessage);
+                alert("You are not owner! or please insert correct address list");
             }
 
         }
