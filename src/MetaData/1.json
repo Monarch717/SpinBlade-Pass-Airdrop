@@ -1,0 +1,11 @@
+{
+  "name": "IbrahimLee - Messi",
+  "description": "Legend of Football, I love you!",
+  "image": "https://gateway.pinata.cloud/ipfs/QmUFaVj11gcJCaffh74ntBnw7TmYyFJSyDFctR9aaNZRZK",
+  "attributes": [
+    {
+      "trait_type" : "Type",
+      "value" : "Messi"
+    }
+  ]
+}
