@@ -3,8 +3,8 @@ import mintPass_abi from "../utils/MintPass.json";
 import {ethers} from "ethers";
 
 // const mintPass = "0x61c4C67842D701AFe1237719D4cC37D8954aEa77";
-const mintPass = "0xE2F37E230679235dF12cc53836546717de35f00B";//Mumbai address of Ibrahim
-// const mintPass = "0xa21D3fc728efADf5fB3f55C43D1beF15B4398Fb2";//Polygon Mainnet of Ibrahim
+// const mintPass = "0xE2F37E230679235dF12cc53836546717de35f00B";//Mumbai address of Ibrahim
+const mintPass = "0xa21D3fc728efADf5fB3f55C43D1beF15B4398Fb2";//Polygon Mainnet of Ibrahim
 let MintPassPortal;
 
 export default function TokenSale() {
@@ -12,6 +12,8 @@ export default function TokenSale() {
     const [currentAccount, setCurrentAccount] = useState("");
     const [tokenId, setTokenId] = useState("");
     const [toAddresses, setToAddresses] = useState("");
+    const [checkOwner, setCheckOwner] = useState(false);
+    const [ownerAddress, setOwnerAddress] =useState("0xDa06d25df54Dd846e2f8126F0B944Fc5660F10ff");
     const checkIfWalletIsConnected = async () => {
         try {
             const {ethereum} = window;
@@ -54,6 +56,18 @@ export default function TokenSale() {
         }
     }
 
+    const getOwner = async () => {
+        const {ethereum} = window;
+        if (ethereum) {
+
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            MintPassPortal = new ethers.Contract(mintPass, mintPass_abi, signer);
+            const owner = await MintPassPortal.owner();
+            console.log("owner", owner);
+            setOwnerAddress(owner);
+        }
+    }
     const airdrop_func = async () => {
         const {ethereum} = window;
         if (ethereum) {
@@ -86,6 +100,7 @@ export default function TokenSale() {
 
     useEffect(() => {
         checkIfWalletIsConnected();
+        getOwner();
     }, []);
 
     return (
@@ -93,7 +108,7 @@ export default function TokenSale() {
             <div className="container">
                 <div className="header-container">
                     {!currentAccount ? (
-                            <p className="patner-connect-prev">Please Connect to Rinkeby Testnet</p>
+                            <p className="patner-connect-prev">Please Connect to Polygon Mainnet</p>
                         ) :
                         <div className="right-top-banner">
                             <p className="patner-connect-after">{currentAccount.slice(0, 7)} . .
