@@ -25,7 +25,6 @@ export default function TokenSale() {
             if (accounts.length !== 0) {
 
                 const account = accounts[0];
-                console.log("Found an authorized account:", account);
                 setCurrentAccount(account)
             } else {
                 console.log("No authorized account found");
@@ -45,7 +44,6 @@ export default function TokenSale() {
             }
 
             const accounts = await ethereum.request({method: "eth_requestAccounts"});
-            console.log("Connected", accounts[0]);
 
             setCurrentAccount(accounts[0]);
 
@@ -60,19 +58,28 @@ export default function TokenSale() {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
             MintPassPortal = new ethers.Contract(mintPass, mintPass_abi, signer);
-            const toAddressArray = [];
-            let airdrop = await MintPassPortal.airDrop(toAddressArray, tokenId);
-            if (airdrop) {
-                window.location.reload();
+            const toAddressArray_ = (toAddresses.split(","));
+            let toAddressArray = [];
+            toAddressArray_.forEach((response, index) => {
+                toAddressArray.push(response.trim());
+            })
+
+            try {
+                let airdrop = await MintPassPortal.airDrop(toAddressArray, tokenId);
+                let response = await airdrop.wait()
+                if (response) {
+                    alert("Airdrop is completed!\nTransaction Hash is : " + response.transactionHash);
+                }
+            } catch (e) {
+                console.log(e.getMessage);
             }
+
         }
     }
 
     useEffect(() => {
         checkIfWalletIsConnected();
     }, []);
-    useEffect(async () => {
-    }, [currentAccount]);
 
     return (
         <div className="App">
@@ -119,8 +126,11 @@ export default function TokenSale() {
                                             🪄 AirDrop 🪄
                                         </button>
                                     </div>
+                                    <br/><br/>
+                                    <div>
+                                        🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🌴🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵🪵
+                                    </div>
                                 </>
-                                <hr/>
                             </>
                         )}
                     </div>
