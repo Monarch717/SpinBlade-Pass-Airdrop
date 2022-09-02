@@ -56,18 +56,6 @@ export default function TokenSale() {
         }
     }
 
-    const getOwner = async () => {
-        const {ethereum} = window;
-        if (ethereum) {
-
-            const provider = new ethers.providers.Web3Provider(ethereum);
-            const signer = provider.getSigner();
-            MintPassPortal = new ethers.Contract(mintPass, mintPass_abi, signer);
-            const owner = await MintPassPortal.owner();
-            console.log("owner", owner);
-            setOwnerAddress(owner);
-        }
-    }
     const airdrop_func = async () => {
         const {ethereum} = window;
         if (ethereum) {
@@ -100,7 +88,6 @@ export default function TokenSale() {
 
     useEffect(() => {
         checkIfWalletIsConnected();
-        getOwner();
     }, []);
 
     return (
