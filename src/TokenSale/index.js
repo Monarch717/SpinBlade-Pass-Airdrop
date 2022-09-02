@@ -3,6 +3,8 @@ import mintPass_abi from "../utils/MintPass.json";
 import {ethers} from "ethers";
 
 const mintPass = "0x61c4C67842D701AFe1237719D4cC37D8954aEa77";
+// const mintPass = "0xE2F37E230679235dF12cc53836546717de35f00B";//Mumbai address of Ibrahim
+// const mintPass = "0xa21D3fc728efADf5fB3f55C43D1beF15B4398Fb2";//Polygon Mainnet of Ibrahim
 let MintPassPortal;
 
 export default function TokenSale() {
