@@ -115,13 +115,13 @@ export default function TokenSale() {
                                 <>
                                     <div>
                                         <textarea className="toAddresses w-50 p-3" rows={5}
-                                                  placeholder={`To Addresses here : Type Array`}
+                                                  placeholder={`To Addresses here : you can separate addresses by ','`}
                                                   onChange={(e) => {
                                                       setToAddresses(e.target.value);
                                                   }}/>
                                         <br/>
                                         <br/>
-                                        <input className="tokenId w-50 p-3" type="number" placeholder="0"
+                                        <input className="tokenId w-50 p-3" type="number" placeholder="token id here : number"
                                                value={tokenId}
                                                onChange={(e) => {
                                                    setTokenId(e.target.value);
