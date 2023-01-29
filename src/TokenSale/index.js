@@ -62,7 +62,7 @@ export default function TokenSale() {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
             MintPassPortal = new ethers.Contract(mintPass, mintPass_abi, signer);
-            const toAddressArray_ = (toAddresses.split(","));
+            const toAddressArray_ = (toAddresses.split("\n"));
             let toAddressArray = [];
             toAddressArray_.forEach((response, index) => {
                 toAddressArray.push(response.trim());
