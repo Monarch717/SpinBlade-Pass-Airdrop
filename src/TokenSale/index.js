@@ -117,7 +117,7 @@ export default function TokenSale() {
                                 <>
                                     <div>
                                         <textarea className="toAddresses w-50 p-3" rows={5}
-                                                  placeholder={`To Addresses here : you can separate addresses by ','`}
+                                                  placeholder={`To Addresses here : you can separate addresses by enter key`}
                                                   onChange={(e) => {
                                                       setToAddresses(e.target.value);
                                                   }}/>
